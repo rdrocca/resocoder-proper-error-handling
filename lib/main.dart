@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:proper_error_handling_tutorial/post_change_notifier.dart';
-// import 'package:provider/provider.dart';
 
 import 'post_service.dart';
 
@@ -29,7 +27,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Error Handling'),
+        title: Center(child: Text('Error Handling')),
       ),
       body: Center(
         child: Column(
@@ -54,7 +52,9 @@ class _HomeState extends State<Home> {
             RaisedButton(
               child: Text('Get Post'),
               onPressed: () async {
-                postFuture = postService.getOnePost();
+                setState(() {
+                  postFuture = postService.getOnePost();
+                });
               },
             ),
           ],

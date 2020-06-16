@@ -19,26 +19,15 @@ class FakeHttpClient {
 class PostService {
   final httpClient = FakeHttpClient();
   Future<Post> getOnePost() async {
+    // The WORST type of error handling.
+    // There's no way to get these errors messages to the UI.
     try {
       final responseBody = await httpClient.getResponseBody();
       return Post.fromJson(responseBody);
-    } on SocketException {
-      throw Failure('No Internet connection 😑');
-    } on HttpException {
-      throw Failure("Couldn't find the post 😱");
-    } on FormatException {
-      throw Failure("Bad response format 👎");
+    } catch (e) {
+      print(e);
     }
   }
-}
-
-class Failure {
-  final String message;
-
-  Failure(this.message);
-
-  @override
-  String toString() => message;
 }
 
 class Post {
