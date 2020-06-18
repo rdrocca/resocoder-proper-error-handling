@@ -44,11 +44,10 @@ class _HomeState extends State<Home> {
                 } else if (notifier.state == NotifierState.loading) {
                   return CircularProgressIndicator();
                 } else {
-                  if (notifier.failure != null) {
-                    return StyledText(notifier.failure.toString());
-                  } else {
-                    return StyledText(notifier.post.toString());
-                  }
+                  return notifier.post.fold(
+                    (failure) => StyledText(failure.toString()),
+                    (post) => StyledText(post.toString()),
+                  );
                 }
               },
             ),
@@ -56,7 +55,8 @@ class _HomeState extends State<Home> {
               child: Text('Get Post'),
               onPressed: () async {
                 setState(() {
-                  Provider.of<PostChangeNotifier>(context,listen:false).getOnePost();
+                  Provider.of<PostChangeNotifier>(context, listen: false)
+                      .getOnePost();
                 });
               },
             ),
