@@ -9,10 +9,10 @@ class FakeHttpClient {
     //! No Internet Connection
     // throw SocketException('No Internet');
     //! 404
-    // throw HttpException('404');
-    //! Invalid JSON (throws FormatException)
+    throw HttpException('404');
+    // ! Invalid JSON (throws FormatException)
     // return 'abcd';
-    return '{"userId":1,"id":1,"title":"nice title","body":"cool body"}';
+    // return '{"userId":1,"id":1,"title":"nice title","body":"cool body"}';
   }
 }
 
@@ -69,6 +69,6 @@ class Post {
 
   @override
   String toString() {
-    return 'Post id: $id, userId: $userId, title: $title, body: $body';
+    return 'Post(id: $id, userId: $userId, title: $title, body: $body)';
   }
 }
